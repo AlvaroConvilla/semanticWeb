@@ -11,4 +11,24 @@ public class BusController {
     public ModelAndView index(){
         return new ModelAndView("index");
     }
+
+    @RequestMapping("/routes")
+    public ModelAndView routes(){
+        return new ModelAndView("routes");
+    }
+
+    @RequestMapping("/times")
+    public ModelAndView times(){
+        return new ModelAndView("times");
+    }
+
+    @RequestMapping("/stops")
+    public ModelAndView stops(){
+        return new ModelAndView("stops");
+    }
+
+    @RequestMapping("/timetable")
+    public ModelAndView timetable(){
+        return new ModelAndView("timetable");
+    }
 }

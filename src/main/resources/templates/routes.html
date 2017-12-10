@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Home</title>
+<title>Rutas de autobús</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
@@ -14,7 +15,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-     <span class="w3-bar-item w3-right">Bienvenido</span>
+    <span class="w3-bar-item w3-right">Bienvenido</span>
 </div>
 
 
@@ -42,7 +43,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                     <h3>5</h3>
                 </div>-->
                 <div class="w3-clear"></div>
-                <h4><a th:href="@{/routes}">Líneas de Autobús</a></h4>
+                <h4><a href="/route">Líneas de Autobús</a></h4>
             </div>
         </div>
         <div class="w3-quarter">
@@ -52,60 +53,25 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                     <h3>00:00</h3>
                 </div> -->
                 <div class="w3-clear"></div>
-                <h4><a th:href="@{/times}">Tiempo de espera</a></h4>
+                <h4><a href="/routes">Tiempo de espera</a></h4>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-teal w3-padding-16">
                 <div class="w3-left"><i class="fa fa-map w3-xxxlarge"></i></div>
                 <div class="w3-clear"></div>
-                <h4><a th:href="@{/stops}">Paradas</a></h4>
+                <h4>Paradas</h4>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-orange w3-text-white w3-padding-16">
                 <div class="w3-left"><i class="fa fa-calendar w3-xxxlarge"></i></div>
                 <div class="w3-clear"></div>
-                <h4><a th:href="@{/timetable}">Horarios y Calendarios</a></h4>
+                <h4>Horarios y Calendarios</h4>
             </div>
         </div>
     </div>
-
-    <div class="w3-panel">
-        <div class="w3-row-padding" style="margin:0 -16px">
-            <div class="w3-third">
-                <h5>Paradas</h5>
-                <iframe src="https://www.google.com/maps/d/embed?mid=1xyVjT9b_h5BXur5m2Nv9hq93WCWK_1jh" width="1000" height="500"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!--<hr>-->
-    <div class="w3-container">
-        <h5>General Stats</h5>
-        <p>New Visitors</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-        </div>
-
-        <p>New Users</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-        </div>
-
-        <p>Bounce Rate</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>Powered by <a href="http://datos.alcobendas.org/dataset?tags=Autob%C3%BAs&amp;groups=transporte" target="_blank">Ayuntamiento de Alcobendas</a></p>
-    </footer>
-
-    <!-- End page content -->
-</div>
-
 </body>
+
+
 </html>
