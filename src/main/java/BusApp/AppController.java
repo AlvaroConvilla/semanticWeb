@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class AppController {
 
@@ -12,14 +14,16 @@ public class AppController {
     AppService appService;
 
     @RequestMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index()
+    {
+        appService.estadisticas();
         return new ModelAndView("index");
     }
 
     @RequestMapping("/routes")
     public ModelAndView routes(){
-        appService.listarRutas();
-        return new ModelAndView("routes");
+        List<Route> rutas = appService.listarRutas();
+        return new ModelAndView("routes").addObject("rutas", rutas);
     }
 
     @RequestMapping("/times")

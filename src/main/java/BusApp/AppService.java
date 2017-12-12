@@ -61,4 +61,131 @@ public class AppService {
         }
         return lista;
     }
+
+    public List<Double> estadisticas(){
+
+        List<Double> lista = new LinkedList<Double>();
+        String file = "src/main/resources/static/rdf/stopsautobus-updated.ttl";
+        Model model = ModelFactory.createDefaultModel();
+        model.read(file);
+
+        // Get the total number of Bus stops
+        String queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
+                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
+                "SELECT (count(*) as ?total) WHERE {" +
+                "" +
+                "   ?busStop a dbpedia:Bus_stop ;" +
+                "   :stopName ?stopName ;" +
+                "   :stopAddress ?stopAddress ;" +
+                "   geo:lat ?geoLat ;" +
+                "   geo:long ?geoLong ;" +
+                "   :stopZone ?stopZone ." +
+                "" +
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qexec = QueryExecutionFactory.create(query, model);
+        ResultSet resultSet = qexec.execSelect();
+        QuerySolution binding = resultSet.nextSolution();
+        Literal total = (Literal) binding.get("total");
+        double t = total.getInt(); // With this we get all percents
+
+
+        // Get the total "A" Bus Stops
+        queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
+                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
+                "SELECT (count(*) as ?total) WHERE {" +
+                "" +
+                "   ?busStop a dbpedia:Bus_stop ;" +
+                "   :stopName ?stopName ;" +
+                "   :stopAddress ?stopAddress ;" +
+                "   geo:lat ?geoLat ;" +
+                "   geo:long ?geoLong ;" +
+                "   :stopZone \"A\" ." +
+                "" +
+                "}";
+        query = QueryFactory.create(queryString);
+        qexec = QueryExecutionFactory.create(query, model);
+        resultSet = qexec.execSelect();
+        binding = resultSet.nextSolution();
+        Literal zonaA = (Literal) binding.get("total");
+        int a = zonaA.getInt();
+        double aPercent = (a/t) * 100;
+        lista.add(aPercent);
+
+        // Get the total "B1" Bus Stops
+        queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
+                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
+                "SELECT (count(*) as ?total) WHERE {" +
+                "" +
+                "   ?busStop a dbpedia:Bus_stop ;" +
+                "   :stopName ?stopName ;" +
+                "   :stopAddress ?stopAddress ;" +
+                "   geo:lat ?geoLat ;" +
+                "   geo:long ?geoLong ;" +
+                "   :stopZone \"B1\" ." +
+                "" +
+                "}";
+        query = QueryFactory.create(queryString);
+        qexec = QueryExecutionFactory.create(query, model);
+        resultSet = qexec.execSelect();
+        binding = resultSet.nextSolution();
+        Literal zonaB1 = (Literal) binding.get("total");
+        int b1 = zonaB1.getInt();
+        double b1Percent = (b1/t) * 100;
+        lista.add(b1Percent);
+
+        // Get the total "B2" Bus Stops
+        queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
+                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
+                "SELECT (count(*) as ?total) WHERE {" +
+                "" +
+                "   ?busStop a dbpedia:Bus_stop ;" +
+                "   :stopName ?stopName ;" +
+                "   :stopAddress ?stopAddress ;" +
+                "   geo:lat ?geoLat ;" +
+                "   geo:long ?geoLong ;" +
+                "   :stopZone \"B2\" ." +
+                "" +
+                "}";
+        query = QueryFactory.create(queryString);
+        qexec = QueryExecutionFactory.create(query, model);
+        resultSet = qexec.execSelect();
+        binding = resultSet.nextSolution();
+        Literal zonaB2 = (Literal) binding.get("total");
+        int b2 = zonaB2.getInt();
+        double b2Percent = (b2/t) * 100;
+        lista.add(b2Percent);
+
+
+        // Get the total "B3" Bus Stops
+        queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
+                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
+                "SELECT (count(*) as ?total) WHERE {" +
+                "" +
+                "   ?busStop a dbpedia:Bus_stop ;" +
+                "   :stopName ?stopName ;" +
+                "   :stopAddress ?stopAddress ;" +
+                "   geo:lat ?geoLat ;" +
+                "   geo:long ?geoLong ;" +
+                "   :stopZone \"B3\" ." +
+                "" +
+                "}";
+        query = QueryFactory.create(queryString);
+        qexec = QueryExecutionFactory.create(query, model);
+        resultSet = qexec.execSelect();
+        binding = resultSet.nextSolution();
+        Literal zonaB3 = (Literal) binding.get("total");
+        int b3 = zonaB3.getInt();
+        double b3Percent = (b3/t) * 100;
+        lista.add(b3Percent);
+
+        return lista;
+    }
+
+
 }
