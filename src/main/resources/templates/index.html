@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Home</title>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../static/css/styleIndex.css" th:href="@{/css/styleIndex.css}"/>
+</head>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -38,9 +41,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="w3-quarter">
             <div class="w3-container w3-red w3-padding-16">
                 <div class="w3-left"><i class="fa fa-bus w3-xxxlarge"></i></div>
-                <!--<div class="w3-right">
-                    <h3>5</h3>
-                </div>-->
                 <div class="w3-clear"></div>
                 <h4><a th:href="@{/routes}">Líneas de Autobús</a></h4>
             </div>
@@ -48,9 +48,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="w3-quarter">
             <div class="w3-container w3-blue w3-padding-16">
                 <div class="w3-left"><i class="fa fa-clock-o w3-xxxlarge"></i></div>
-                <!--<div class="w3-right">
-                    <h3>00:00</h3>
-                </div> -->
                 <div class="w3-clear"></div>
                 <h4><a th:href="@{/times}">Tiempo de espera</a></h4>
             </div>
@@ -101,7 +98,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-        <p>Powered by <a href="http://datos.alcobendas.org/dataset?tags=Autob%C3%BAs&amp;groups=transporte" target="_blank">Ayuntamiento de Alcobendas</a></p>
+        <p>Powered by <a href="http://datos.alcobendas.org/dataset?tags=Autob%C3%BAs&amp;groups=transporte">Ayuntamiento de Alcobendas</a></p>
     </footer>
 
     <!-- End page content -->
