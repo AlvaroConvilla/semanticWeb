@@ -74,7 +74,37 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             </div>
         </div>
     </div>
-
+    <section>
+        <section class="row">
+            <section class="col-md-12">
+                <h2>Líneas disponibles</h2>
+                <section class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Número de Linea</th>
+                            <th>Trayecto</th>
+                            <th>Mas info</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="r : ${rutas}">
+                            <td th:text="${r.routeLine}">Color</td>
+                            <td th:text="${r.journey}">Color</td>
+                            <td>
+                                <section class="btn-group">
+                                    <a th:href="${r.routeURL}"><!--th:href="@{/editUser(id=${us.getId()})}"-->
+                                        <button type="button" class="btn btn-primary btn-sm"><span class="fa fa-info-circle"></span></button>
+                                    </a>
+                                </section>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+        </section>
+    </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
         <p>Powered by <a href="http://datos.alcobendas.org/dataset?tags=Autob%C3%BAs&amp;groups=transporte">Ayuntamiento de Alcobendas</a></p>
