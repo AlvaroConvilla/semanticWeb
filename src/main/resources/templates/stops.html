@@ -18,7 +18,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item w3-right">Bienvenido</span>
+    <span class="w3-bar-item w3-right">Busca dónde estás situado</span>
 </div>
 
 
@@ -74,6 +74,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             </div>
         </div>
     </div>
+
+    <form role="search" th:action="@{/search}" method="get">
+        <label for="idParada">Introduce el código de la parada</label>
+        <input type="text" id="idParada" name="idParada" placeHolder="Introduce el código de parada"/>
+        <input type="submit" value="Buscar"/>
+    </form>
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
         <p>Powered by <a href="http://datos.alcobendas.org/dataset?tags=Autob%C3%BAs&amp;groups=transporte">Ayuntamiento de Alcobendas</a></p>
