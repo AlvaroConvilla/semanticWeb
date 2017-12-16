@@ -14,6 +14,7 @@ import org.apache.jena.vocabulary.XSD;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -62,37 +63,16 @@ public class AppService {
         return lista;
     }
 
-    public List<Double> estadisticas(){
+    public List<Integer> estadisticas(){
 
-        List<Double> lista = new LinkedList<Double>();
+        List<Integer> lista = new LinkedList<Integer>();
         String file = "src/main/resources/static/rdf/stopsautobus-updated.ttl";
         Model model = ModelFactory.createDefaultModel();
         model.read(file);
 
-        // Get the total number of Bus stops
-        String queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
-                "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
-                "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
-                "SELECT (count(*) as ?total) WHERE {" +
-                "" +
-                "   ?busStop a dbpedia:Bus_stop ;" +
-                "   :stopName ?stopName ;" +
-                "   :stopAddress ?stopAddress ;" +
-                "   geo:lat ?geoLat ;" +
-                "   geo:long ?geoLong ;" +
-                "   :stopZone ?stopZone ." +
-                "" +
-                "}";
-        Query query = QueryFactory.create(queryString);
-        QueryExecution qexec = QueryExecutionFactory.create(query, model);
-        ResultSet resultSet = qexec.execSelect();
-        QuerySolution binding = resultSet.nextSolution();
-        Literal total = (Literal) binding.get("total");
-        double t = total.getInt(); // With this we get all percents
-
 
         // Get the total "A" Bus Stops
-        queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
+        String queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
                 "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#> " +
                 "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "  +
                 "SELECT (count(*) as ?total) WHERE {" +
@@ -105,14 +85,13 @@ public class AppService {
                 "   :stopZone \"A\" ." +
                 "" +
                 "}";
-        query = QueryFactory.create(queryString);
-        qexec = QueryExecutionFactory.create(query, model);
-        resultSet = qexec.execSelect();
-        binding = resultSet.nextSolution();
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qexec = QueryExecutionFactory.create(query, model);
+        ResultSet resultSet = qexec.execSelect();
+        QuerySolution binding = resultSet.nextSolution();
         Literal zonaA = (Literal) binding.get("total");
         int a = zonaA.getInt();
-        double aPercent = (a/t) * 100;
-        lista.add(aPercent);
+        lista.add(a);
 
         // Get the total "B1" Bus Stops
         queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
@@ -134,8 +113,7 @@ public class AppService {
         binding = resultSet.nextSolution();
         Literal zonaB1 = (Literal) binding.get("total");
         int b1 = zonaB1.getInt();
-        double b1Percent = (b1/t) * 100;
-        lista.add(b1Percent);
+        lista.add(b1);
 
         // Get the total "B2" Bus Stops
         queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
@@ -157,9 +135,7 @@ public class AppService {
         binding = resultSet.nextSolution();
         Literal zonaB2 = (Literal) binding.get("total");
         int b2 = zonaB2.getInt();
-        double b2Percent = (b2/t) * 100;
-        lista.add(b2Percent);
-
+        lista.add(b2);
 
         // Get the total "B3" Bus Stops
         queryString = "PREFIX geo: " + " <http://www.w3.org/2003/01/geo/wgs84_pos#> " +
@@ -181,10 +157,40 @@ public class AppService {
         binding = resultSet.nextSolution();
         Literal zonaB3 = (Literal) binding.get("total");
         int b3 = zonaB3.getInt();
-        double b3Percent = (b3/t) * 100;
-        lista.add(b3Percent);
+        lista.add(b3);
 
         return lista;
+    }
+
+    public BusStop infoParada(String idParada){
+        String file = "src/main/resources/static/rdf/stopsautobus-updated.ttl";
+        Model model = ModelFactory.createDefaultModel();
+        model.read(file);
+
+        String queryString = "PREFIX dbpedia: " + "<http://dbpedia.org/page/> "
+                + "PREFIX : " + "<http://www.semanticweb.org/group12/ontology#>"
+                + "SELECT ?stopName ?stopAddress ?stopZone WHERE { " +
+                  "<http://www.semanticweb.org/group12/resources/Busstop/" + idParada + "> a dbpedia:Bus_stop ;"
+                + ":stopName ?stopName ;"
+                + ":stopAddress ?stopAddress ;"
+                + ":stopZone ?stopZone ." +
+                "}";
+
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qexec = QueryExecutionFactory.create(query, model);
+        ResultSet resultSet = qexec.execSelect();
+        QuerySolution binding = resultSet.nextSolution();
+        BusStop busStop = new BusStop();
+        Literal stopName = (Literal) binding.get("stopName");
+        Literal stopAddress = (Literal) binding.get("stopAddress");
+        Literal stopZone = (Literal) binding.get("stopZone");
+
+        busStop.setStopName(stopName.toString());
+        busStop.setStopAddress(stopAddress.toString());
+        busStop.setStopZone(stopZone.toString());
+
+        return busStop;
+
     }
 
 
