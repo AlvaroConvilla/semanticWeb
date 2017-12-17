@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AppService {
@@ -179,17 +180,19 @@ public class AppService {
         Query query = QueryFactory.create(queryString);
         QueryExecution qexec = QueryExecutionFactory.create(query, model);
         ResultSet resultSet = qexec.execSelect();
-        QuerySolution binding = resultSet.nextSolution();
-        BusStop busStop = new BusStop();
-        Literal stopName = (Literal) binding.get("stopName");
-        Literal stopAddress = (Literal) binding.get("stopAddress");
-        Literal stopZone = (Literal) binding.get("stopZone");
 
-        busStop.setStopName(stopName.toString());
-        busStop.setStopAddress(stopAddress.toString());
-        busStop.setStopZone(stopZone.toString());
+        try{
+            QuerySolution binding  = resultSet.nextSolution();
+            Literal stopName = (Literal) binding.get("stopName");
+            Literal stopAddress = (Literal) binding.get("stopAddress");
+            Literal stopZone = (Literal) binding.get("stopZone");
 
-        return busStop;
+            BusStop busStop = new BusStop(stopName.toString(), stopAddress.toString(), stopZone.toString());
+            return busStop;
+
+        }catch (NoSuchElementException e){
+            return null;
+        }
 
     }
 

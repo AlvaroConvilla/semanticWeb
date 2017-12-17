@@ -45,6 +45,9 @@ public class AppController {
     @RequestMapping("/search")
     public ModelAndView searchBusStop(@RequestParam String idParada){
         BusStop busStop = appService.infoParada(idParada);
+        if(busStop == null){
+            return new ModelAndView("/error");
+        }
         return new ModelAndView("/search").addObject("busStop",busStop);
     }
 }
